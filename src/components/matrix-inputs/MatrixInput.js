@@ -1,39 +1,43 @@
 import TextField from "@mui/material/TextField";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/UserContext";
 
-function MatrixInput({ value }) {
-	const { rows, setRows, rowsNumber, setRowsNumber } =
-		useContext(UserContext);
+function MatrixInput({ line, column }) {
+	const {
+		matrix,
+		setMatrix,
+		rowsNumber,
+		setRowsNumber,
+		columnsNumber,
+		setColumnsNumber,
+	} = useContext(UserContext);
 
-	const [inputValue, setInputValue] = useState();
+	const [inputValue, setInputValue] = useState(0);
 
-	function setNewValuesInArray(e) {
-		const newArr = rows.map((row, index) => {
-			if (index == value) {
-				return e.target.value;
-			} else {
-				return row;
-			}
-		});
-
-		console.log("entrou");
-		console.log(newArr);
-		setRows([...newArr]);
+	function setNewValuesInArray() {
+		const newArr = [...matrix];
+		newArr[line][column] = inputValue;
+		setMatrix([...newArr]);
+		console.log(matrix);
 	}
 
 	function handleChangeValue(e) {
 		setInputValue(e.target.value);
-		setNewValuesInArray();
 	}
+
+	useEffect(() => {
+		// 	setNewValuesInArray();
+		setNewValuesInArray();
+	}, [inputValue]);
 
 	return (
 		<TextField
 			hiddenLabel
 			variant="filled"
 			size="small"
-			sx={{ m: 1, width: "30px" }}
-			onChange={setNewValuesInArray}
+			sx={{ m: 1, width: "40px" }}
+			value={inputValue}
+			onChange={handleChangeValue}
 		/>
 	);
 }
