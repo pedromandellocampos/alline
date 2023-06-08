@@ -1,12 +1,23 @@
-const Kernel = require('./kernel');
+import Kernel from "./Guacyra";
 const {
-  $$, kind,
-  addRule, equal, copy, 
-  Form, Eval, lookup, newDef,
-  Plus, Times, Divide, Cons,
-  Integer, Null, List, toString
+  $$,
+  kind,
+  addRule,
+  equal,
+  copy,
+  Form,
+  Eval,
+  lookup,
+  newDef,
+  Plus,
+  Times,
+  Divide,
+  Cons,
+  Integer,
+  Null,
+  List,
+  toString,
 } = Kernel;
-
 
 // https://github.com/bryc/code/blob/master/jshash/PRNGs.md#jsf--smallprng
 function jsf32(a, b, c, d) {
@@ -24,17 +35,18 @@ function jsf32(a, b, c, d) {
   };
 }
 function xmur3(str) {
-  for (var i = 0, h = 1779033703 ^ str.length; i < str.length; i++)
-    (h = Math.imul(h ^ str.charCodeAt(i), 3432918353)),
-      (h = (h << 13) | (h >>> 19));
+  for (var i = 0, h = 1779033703 ^ str.length; i < str.length; i++) {
+    h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
   return function () {
-    (h = Math.imul(h ^ (h >>> 16), 2246822507)),
-      (h = Math.imul(h ^ (h >>> 13), 3266489909));
+    h = Math.imul(h ^ (h >>> 16), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
     return (h ^= h >>> 16) >>> 0;
   };
 }
 let rnd;
-const seed = str => {
+const seed = (str) => {
   const s = xmur3(str.toString(2));
   rnd = jsf32(s(), s(), s(), s());
 };
@@ -49,36 +61,36 @@ const randCombination = (n, m) => {
   const s = [];
   for (let j = n - m + 1; j <= n; ++j) {
     const t = randInteger(1, j);
-    if (s.findIndex(x => x == t) == -1) s.push(t);
+    if (s.findIndex((x) => x == t) == -1) s.push(t);
     else s.push(j);
   }
   return s.sort();
 };
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
-      var j = randInteger(0,i);
-      var temp = array[i];
-      array[i] = array[j];
-      array[j] = temp;
+    var j = randInteger(0, i);
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
 }
-seed('init');
+seed("init");
 
-const RandInteger = Form('RandInteger', { Impure: true });
+const RandInteger = Form("RandInteger", { Impure: true });
 addRule($$`RandInteger(a_Integer, b_Integer)`, ({ a, b }) => {
   return Integer(randInteger(a[1], b[1]));
 });
 
-const RandCombination = Form('RandCombination', { Impure: true });
+const RandCombination = Form("RandCombination", { Impure: true });
 addRule($$`RandCombination(n_Integer, m_Integer)`, ({ n, m }) => {
-  const l = randCombination(n[1], m[1]).map( i => Integer(i));
+  const l = randCombination(n[1], m[1]).map((i) => Integer(i));
   return List(...l);
 });
 
-const RandPermutation = Form('RandPermutation', { Impure: true });
+const RandPermutation = Form("RandPermutation", { Impure: true });
 addRule($$`RandPermutation(n_Integer)`, ({ n }) => {
   const l = [];
-  for(let i=1;i<=n[1]; ++i) l.push(Integer(i));
+  for (let i = 1; i <= n[1]; ++i) l.push(Integer(i));
   shuffleArray(l);
   return List(...l);
 });
@@ -89,7 +101,7 @@ addRule($$`RandPermutation(l_List)`, ({ l }) => {
   return List(...r);
 });
 
-const Seed = Form('Seed', { Impure: true });
+const Seed = Form("Seed", { Impure: true });
 addRule($$`Seed(a_)`, ({ a }) => {
   seed(toString(a));
   return Null;
@@ -97,4 +109,4 @@ addRule($$`Seed(a_)`, ({ a }) => {
 
 const Random = { seed, rand, randInteger, randCombination };
 
-module.exports = Random;
+export default Random;

@@ -1,26 +1,30 @@
 import { Box } from "@mui/material";
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
+import "katex/dist/katex.min.css";
+import Latex from "react-latex-next";
 
-function Output() {
-	const {
-		rowsNumber,
-		setRowsNumber,
-		rows,
-		setRows,
-		columnsNumber,
-		setColumnsNumber,
-		columns,
-		setcolumns,
-		matrix,
-		setMatrix,
-		outputContent,
-		setOutputContent,
-		outputVerify,
-		setOutputVerify,
-	} = useContext(UserContext);
+export default function Output() {
+  const {
+    rowsNumber,
+    setRowsNumber,
+    rows,
+    setRows,
+    columnsNumber,
+    setColumnsNumber,
+    columns,
+    setcolumns,
+    matrix,
+    setMatrix,
+    outputContent,
+    setOutputContent,
+    outputVerify,
+    setOutputVerify,
+  } = useContext(UserContext);
 
-	return <Box>{outputContent}</Box>;
+  return (
+    <Box>
+      <Latex>{outputContent}</Latex>
+    </Box>
+  );
 }
-
-export default Output;
