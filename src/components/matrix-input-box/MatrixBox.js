@@ -36,6 +36,16 @@ function MatrixBox() {
 		setMatrix([...newArr]);
 	}
 
+	function setMatrixWithSameRowsInputs() {
+		let newArrLine = [];
+		for (let i = 0; i < rowsNumber; i++) {
+			if (matrix.length < i) {
+			}
+			newArrLine.push(0);
+		}
+		return newArrLine;
+	}
+
 	useEffect(() => {
 		setMatrixColumnsInputs();
 	}, [rowsNumber, columnsNumber]);
@@ -50,7 +60,6 @@ function MatrixBox() {
 								key={columnIndex}
 								line={lineIndex}
 								column={columnIndex}
-								value={0}
 							/>
 						))}
 					</div>
