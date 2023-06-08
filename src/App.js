@@ -10,6 +10,8 @@ function App() {
 	const [rows, setRows] = useState([]);
 	const [columns, setcolumns] = useState([]);
 	const [matrix, setMatrix] = useState([]);
+	const [outputVerify, setOutputVerify] = useState(false);
+	const [outputContent, setOutputContent] = useState("");
 
 	return (
 		<UserContext.Provider
@@ -24,6 +26,10 @@ function App() {
 				setcolumns,
 				matrix,
 				setMatrix,
+				outputContent,
+				setOutputContent,
+				outputVerify,
+				setOutputVerify,
 			}}
 		>
 			<MainPage />
