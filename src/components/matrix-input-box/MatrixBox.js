@@ -4,18 +4,8 @@ import { useContext, useEffect } from "react";
 import MatrixInput from "../matrix-inputs/MatrixInput";
 
 function MatrixBox() {
-  const {
-    rowsNumber,
-    setRowsNumber,
-    rows,
-    setRows,
-    columnsNumber,
-    setColumnsNumber,
-    columns,
-    setcolumns,
-    matrix,
-    setMatrix,
-  } = useContext(UserContext);
+  const { rowsNumber, columnsNumber, matrix, setMatrix } =
+    useContext(UserContext);
 
   function setMatrixRowsInputs() {
     let newArr = [];
@@ -51,7 +41,14 @@ function MatrixBox() {
   }, [rowsNumber, columnsNumber]);
 
   return (
-    <Box component="span" sx={{ p: 20 }}>
+    <Box
+      component="span"
+      width="100%"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      sx={{ p: 20 }}
+    >
       {matrix.map((lines, lineIndex) => {
         return (
           <div key={lineIndex}>

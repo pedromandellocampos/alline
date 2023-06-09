@@ -6,34 +6,29 @@ import Output from "../../components/output";
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import AnswersAccordion from "../../components/accordion";
-import Latex from "react-latex-next";
-import OutputCombination from "../../components/output Combination";
+import NavBar from "../../components/navbar";
 
 function MainPage() {
-  const {
-    rowsNumber,
-    setRowsNumber,
-    rows,
-    setRows,
-    columnsNumber,
-    setColumnsNumber,
-    columns,
-    setcolumns,
-    matrix,
-    setMatrix,
-    outputContent,
-    setOutputContent,
-    outputVerify,
-    setOutputVerify,
-    independentVectorsInfo,
-  } = useContext(UserContext);
+  const { outputContent, outputVerify, independentVectorsInfo } =
+    useContext(UserContext);
 
   return (
     <Box>
-      <PlusMinusButtons parameter="rows" />
-      <PlusMinusButtons parameter="columns" />
-      <GenerateButton />
-      <MatrixBox />
+      <NavBar />
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        marginTop="30px"
+      >
+        <Box display="flex" justifyContent="center" width="100%" gap="30px">
+          <PlusMinusButtons parameter="rows" />
+          <GenerateButton />
+        </Box>
+
+        <MatrixBox width="100%" />
+      </Box>
       {outputVerify == true ? (
         <AnswersAccordion
           text1={<Output content={outputContent} />}

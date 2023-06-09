@@ -4,25 +4,18 @@ import Button from "@mui/material/Button";
 import { ButtonGroup } from "@mui/material";
 
 function PlusMinusButtons({ parameter }) {
-  const {
-    rowsNumber,
-    setRowsNumber,
-    rows,
-    setRows,
-    columnsNumber,
-    setColumnsNumber,
-    columns,
-    setcolumns,
-    matrix,
-    setMatrix,
-  } = useContext(UserContext);
+  const { rowsNumber, setRowsNumber, columnsNumber, setColumnsNumber } =
+    useContext(UserContext);
 
   function handleClick(operation) {
     console.log("entrou");
-    if (parameter == "rows") {
-      setRowsNumber(rowsNumber + 1 * operation);
-    } else if (parameter == "columns") {
+
+    if (rowsNumber >= 2 && operation > 0) {
       setColumnsNumber(columnsNumber + 1 * operation);
+      setRowsNumber(rowsNumber + 1 * operation);
+    } else if (rowsNumber > 2 && operation < 0) {
+      setColumnsNumber(columnsNumber + 1 * operation);
+      setRowsNumber(rowsNumber + 1 * operation);
     }
   }
 

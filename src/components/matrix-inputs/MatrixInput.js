@@ -34,7 +34,7 @@ function MatrixInput({ line, column }) {
       hiddenLabel
       variant="filled"
       size="small"
-      sx={{ m: 1, width: "40px" }}
+      sx={{ m: 1, width: "50px", textAlign: "center" }}
       value={inputValue}
       onChange={handleChangeValue}
     />

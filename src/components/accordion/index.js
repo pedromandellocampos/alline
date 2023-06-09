@@ -7,24 +7,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import UserContext from "../../context/UserContext";
 
 export default function AnswersAccordion({ text1, text2 }) {
-  const {
-    rowsNumber,
-    setRowsNumber,
-    rows,
-    setRows,
-    columnsNumber,
-    setColumnsNumber,
-    columns,
-    setcolumns,
-    matrix,
-    setMatrix,
-    outputContent,
-    setOutputContent,
-    outputVerify,
-    setOutputVerify,
-    setIndependentVectorsInfo,
-  } = React.useContext(UserContext);
-
   return (
     <div>
       <Accordion>
@@ -33,7 +15,7 @@ export default function AnswersAccordion({ text1, text2 }) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Demonstração passo-a-passo</Typography>
+          <Typography>Escalonamento passo-a-passo</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>{text1}</Typography>
