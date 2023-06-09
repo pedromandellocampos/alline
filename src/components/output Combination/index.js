@@ -4,12 +4,12 @@ import UserContext from "../../context/UserContext";
 import "katex/dist/katex.min.css";
 import Latex from "react-latex-next";
 
-export default function Output({ content }) {
-  const { outputContent } = useContext(UserContext);
+export default function OutputCombination() {
+  const { independentVectorsInfo } = useContext(UserContext);
 
   return (
     <Box>
-      <Latex>{content}</Latex>
+      <Latex>{independentVectorsInfo}</Latex>
     </Box>
   );
 }

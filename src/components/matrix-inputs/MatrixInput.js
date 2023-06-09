@@ -3,43 +3,42 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/UserContext";
 
 function MatrixInput({ line, column }) {
-	const {
-		matrix,
-		setMatrix,
-		rowsNumber,
-		setRowsNumber,
-		columnsNumber,
-		setColumnsNumber,
-	} = useContext(UserContext);
+  const {
+    matrix,
+    setMatrix,
+    rowsNumber,
+    setRowsNumber,
+    columnsNumber,
+    setColumnsNumber,
+  } = useContext(UserContext);
 
-	const [inputValue, setInputValue] = useState(0);
+  const [inputValue, setInputValue] = useState(0);
 
-	function setNewValuesInArray() {
-		const newArr = [...matrix];
-		newArr[line][column] = inputValue;
-		setMatrix([...newArr]);
-		console.log(matrix);
-	}
+  function setNewValuesInArray() {
+    const newArr = [...matrix];
+    newArr[line][column] = inputValue;
+    setMatrix([...newArr]);
+  }
 
-	function handleChangeValue(e) {
-		setInputValue(e.target.value);
-	}
+  function handleChangeValue(e) {
+    setInputValue(e.target.value);
+  }
 
-	useEffect(() => {
-		// 	setNewValuesInArray();
-		setNewValuesInArray();
-	}, [inputValue]);
+  useEffect(() => {
+    // 	setNewValuesInArray();
+    setNewValuesInArray();
+  }, [inputValue]);
 
-	return (
-		<TextField
-			hiddenLabel
-			variant="filled"
-			size="small"
-			sx={{ m: 1, width: "40px" }}
-			value={inputValue}
-			onChange={handleChangeValue}
-		/>
-	);
+  return (
+    <TextField
+      hiddenLabel
+      variant="filled"
+      size="small"
+      sx={{ m: 1, width: "40px" }}
+      value={inputValue}
+      onChange={handleChangeValue}
+    />
+  );
 }
 
 export default MatrixInput;

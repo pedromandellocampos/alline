@@ -4,8 +4,27 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import UserContext from "../../context/UserContext";
 
 export default function AnswersAccordion({ text1, text2 }) {
+  const {
+    rowsNumber,
+    setRowsNumber,
+    rows,
+    setRows,
+    columnsNumber,
+    setColumnsNumber,
+    columns,
+    setcolumns,
+    matrix,
+    setMatrix,
+    outputContent,
+    setOutputContent,
+    outputVerify,
+    setOutputVerify,
+    setIndependentVectorsInfo,
+  } = React.useContext(UserContext);
+
   return (
     <div>
       <Accordion>
@@ -26,7 +45,7 @@ export default function AnswersAccordion({ text1, text2 }) {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Respostas</Typography>
+          <Typography>Combinações Lineares</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>{text2}</Typography>

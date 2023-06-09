@@ -6,6 +6,8 @@ import Output from "../../components/output";
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import AnswersAccordion from "../../components/accordion";
+import Latex from "react-latex-next";
+import OutputCombination from "../../components/output Combination";
 
 function MainPage() {
   const {
@@ -23,6 +25,7 @@ function MainPage() {
     setOutputContent,
     outputVerify,
     setOutputVerify,
+    independentVectorsInfo,
   } = useContext(UserContext);
 
   return (
@@ -32,7 +35,10 @@ function MainPage() {
       <GenerateButton />
       <MatrixBox />
       {outputVerify == true ? (
-        <AnswersAccordion text1={<Output />} text2={null} />
+        <AnswersAccordion
+          text1={<Output content={outputContent} />}
+          text2={<Output content={independentVectorsInfo} />}
+        />
       ) : null}
     </Box>
   );

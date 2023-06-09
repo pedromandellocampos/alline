@@ -4,69 +4,69 @@ import { useContext, useEffect } from "react";
 import MatrixInput from "../matrix-inputs/MatrixInput";
 
 function MatrixBox() {
-	const {
-		rowsNumber,
-		setRowsNumber,
-		rows,
-		setRows,
-		columnsNumber,
-		setColumnsNumber,
-		columns,
-		setcolumns,
-		matrix,
-		setMatrix,
-	} = useContext(UserContext);
+  const {
+    rowsNumber,
+    setRowsNumber,
+    rows,
+    setRows,
+    columnsNumber,
+    setColumnsNumber,
+    columns,
+    setcolumns,
+    matrix,
+    setMatrix,
+  } = useContext(UserContext);
 
-	function setMatrixRowsInputs() {
-		let newArr = [];
-		for (let i = 0; i < rowsNumber; i++) {
-			newArr.push(0);
-		}
-		return newArr;
-	}
+  function setMatrixRowsInputs() {
+    let newArr = [];
+    for (let i = 0; i < rowsNumber; i++) {
+      newArr.push(0);
+    }
+    return newArr;
+  }
 
-	function setMatrixColumnsInputs() {
-		let newArr = [];
+  function setMatrixColumnsInputs() {
+    let newArr = [];
 
-		for (let i = 0; i < columnsNumber; i++) {
-			let linha = setMatrixRowsInputs();
-			newArr.push(linha);
-		}
-		console.log(newArr);
-		setMatrix([...newArr]);
-	}
+    for (let i = 0; i < columnsNumber; i++) {
+      let linha = setMatrixRowsInputs();
+      newArr.push(linha);
+    }
 
-	function setMatrixWithSameRowsInputs() {
-		let newArrLine = [];
-		for (let i = 0; i < rowsNumber; i++) {
-			if (matrix.length < i) {
-			}
-			newArrLine.push(0);
-		}
-		return newArrLine;
-	}
+    setMatrix([...newArr]);
+  }
 
-	useEffect(() => {
-		setMatrixColumnsInputs();
-	}, [rowsNumber, columnsNumber]);
+  function setMatrixWithSameRowsInputs() {
+    let newArrLine = [];
+    for (let i = 0; i < rowsNumber; i++) {
+      if (matrix.length < i) {
+      }
+      newArrLine.push(0);
+    }
+    return newArrLine;
+  }
 
-	return (
-		<Box component="span" sx={{ p: 20 }}>
-			{matrix.map((lines, lineIndex) => {
-				return (
-					<div key={lineIndex}>
-						{lines.map((column, columnIndex) => (
-							<MatrixInput
-								key={columnIndex}
-								line={lineIndex}
-								column={columnIndex}
-							/>
-						))}
-					</div>
-				);
-			})}
-		</Box>
-	);
+  useEffect(() => {
+    setMatrixColumnsInputs();
+  }, [rowsNumber, columnsNumber]);
+
+  return (
+    <Box component="span" sx={{ p: 20 }}>
+      {matrix.map((lines, lineIndex) => {
+        return (
+          <div key={lineIndex}>
+            {lines.map((column, columnIndex) => (
+              <MatrixInput
+                key={columnIndex}
+                line={lineIndex}
+                column={columnIndex}
+              />
+            ))}
+          </div>
+        );
+      })}
+    </Box>
+  );
 }
 
 export default MatrixBox;
