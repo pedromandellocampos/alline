@@ -21,6 +21,7 @@ function MatrixInput({ line, column }) {
   }
 
   function handleChangeValue(e) {
+    console.log("Entrou 22");
     setInputValue(e.target.value);
   }
 
@@ -29,13 +30,23 @@ function MatrixInput({ line, column }) {
     setNewValuesInArray();
   }, [inputValue]);
 
+  useEffect(() => {
+    console.log(" entrou:  ");
+
+    setInputValue(0);
+  }, [rowsNumber]);
+
   return (
-    <TextField
-      hiddenLabel
+    <input
+      style={{
+        textAlign: "center",
+        width: "50px",
+        height: "40px",
+        borderRadius: "7px",
+      }}
       variant="filled"
       size="small"
-      sx={{ m: 1, width: "50px", textAlign: "center" }}
-      value={inputValue}
+      defaultValue="0"
       onChange={handleChangeValue}
     />
   );

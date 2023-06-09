@@ -14,6 +14,7 @@ function App() {
   const [outputContent, setOutputContent] = useState("");
   const [reducedMatrix, setReducedMatrix] = useState([]);
   const [independentVectorsInfo, setIndependentVectorsInfo] = useState("");
+  const [spaceBases, setSpaceBases] = useState("");
 
   return (
     <UserContext.Provider
@@ -36,6 +37,8 @@ function App() {
         setReducedMatrix,
         independentVectorsInfo,
         setIndependentVectorsInfo,
+        spaceBases,
+        setSpaceBases,
       }}
     >
       <MainPage />

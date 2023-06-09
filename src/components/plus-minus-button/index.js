@@ -8,8 +8,6 @@ function PlusMinusButtons({ parameter }) {
     useContext(UserContext);
 
   function handleClick(operation) {
-    console.log("entrou");
-
     if (rowsNumber >= 2 && operation > 0) {
       setColumnsNumber(columnsNumber + 1 * operation);
       setRowsNumber(rowsNumber + 1 * operation);

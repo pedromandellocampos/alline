@@ -9,8 +9,13 @@ import AnswersAccordion from "../../components/accordion";
 import NavBar from "../../components/navbar";
 
 function MainPage() {
-  const { outputContent, outputVerify, independentVectorsInfo } =
-    useContext(UserContext);
+  const {
+    outputContent,
+    outputVerify,
+    independentVectorsInfo,
+    spaceBases,
+    setSpaceBases,
+  } = useContext(UserContext);
 
   return (
     <Box>
@@ -33,6 +38,7 @@ function MainPage() {
         <AnswersAccordion
           text1={<Output content={outputContent} />}
           text2={<Output content={independentVectorsInfo} />}
+          text3={<Output content={spaceBases} />}
         />
       ) : null}
     </Box>

@@ -48,14 +48,19 @@ function convertToFractionLatex(value) {
       denominator++;
     }
   }
+  console.log("denominator");
 
-  return "\\frac{" + numerator + "}{" + denominator + "}";
+  console.log(denominator);
+
+  if (denominator == 1) {
+    return `${numerator}`;
+  } else {
+    return "\\frac{" + numerator + "}{" + denominator + "}";
+  }
 }
 
 function getColumns(matrix, columnIndices) {
   const columns = [];
-  console.log("TESTESSS");
-  console.log(columnIndices);
 
   for (let j = 0; j < columnIndices.length; j++) {
     const columnIndex = columnIndices[j];
@@ -63,7 +68,6 @@ function getColumns(matrix, columnIndices) {
 
     for (let i = 0; i < matrix.length; i++) {
       const row = matrix[i];
-      console.log("Teste ----" + row);
       column.push(convertToFractionLatex(row[columnIndex - 1]));
     }
 
@@ -95,24 +99,21 @@ function generateLinearCombinationEquationLatex(index, linearCombination) {
 
   for (let i = 0; i < linearCombination.length; i++) {
     const coefficient = linearCombination[i];
-    equation += coefficient + " \\cdot Vetor_{" + (i + 1) + "}";
 
-    if (i < linearCombination.length - 1) {
-      equation += " + ";
+    if (index != i + 1 && coefficient != 0) {
+      equation += coefficient + " \\cdot Vetor_{" + (i + 1) + "}" + " + ";
     }
   }
 
+  equation = equation.substring(0, equation.length - 2);
   return `$$${equation}$$`;
 }
 
 function checkIdentityMatrix(matrix) {
+  let independentVectors = [];
+  let dependentVectors = [];
   const m = matrix.length;
   const n = matrix[0].length;
-
-  console.log("entrou");
-  console.log(matrix);
-
-  let dependentVectors = [];
 
   for (let i = 0; i < m; i++) {
     let isDependent = false;
@@ -134,6 +135,15 @@ function checkIdentityMatrix(matrix) {
     }
   }
 
+  for (let i = 0; i < n; i++) {
+    if (!dependentVectors.includes(i + 1)) {
+      independentVectors.push(i + 1);
+    }
+  }
+  return [dependentVectors, independentVectors];
+}
+
+function returnLinearCombination(matrix, dependentVectors) {
   if (dependentVectors.length > 0) {
     const colunas = getColumns(matrix, dependentVectors);
     console.log(colunas);
@@ -144,4 +154,28 @@ function checkIdentityMatrix(matrix) {
   }
 }
 
-export { reducedRowEchelonForm, checkIdentityMatrix };
+function arraysToCoordenates(arrays) {
+  let latex = "\\{";
+
+  for (let i = 0; i < arrays.length; i++) {
+    latex += "\\begin{bmatrix}";
+    latex += arrays[i].join(" & ");
+    latex += "\\end{bmatrix}";
+
+    if (i !== arrays.length - 1) {
+      latex += ", ";
+    }
+  }
+
+  latex += "\\}";
+
+  return `$$${latex}$$`;
+}
+
+export {
+  reducedRowEchelonForm,
+  checkIdentityMatrix,
+  returnLinearCombination,
+  arraysToCoordenates,
+  getColumns,
+};

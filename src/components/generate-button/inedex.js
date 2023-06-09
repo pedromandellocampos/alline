@@ -7,6 +7,9 @@ import LA from "../../lib/guacyra/LinearAlgebra";
 import {
   reducedRowEchelonForm,
   checkIdentityMatrix,
+  returnLinearCombination,
+  getColumns,
+  arraysToCoordenates,
 } from "../../lib/matrix-utils/matrixUtils";
 
 export default function GenerateButton() {
@@ -29,22 +32,25 @@ export default function GenerateButton() {
     setReducedMatrix,
     independentVectorsInfo,
     setIndependentVectorsInfo,
+    spaceBases,
+    setSpaceBases,
   } = useContext(UserContext);
 
   const { Matrix, reducedRowEchelonSteps } = LA;
-
   const { formatEchelonSteps } = Formatting;
 
   function reduceMatrix() {
     const redMatrix = reducedRowEchelonForm(matrix);
-    const message = checkIdentityMatrix(redMatrix);
-    console.log(message);
+    const message = returnLinearCombination(
+      redMatrix,
+      checkIdentityMatrix(redMatrix)[0]
+    );
+
+    console.log(checkIdentityMatrix(redMatrix)[0]);
     setIndependentVectorsInfo(`${message}`);
 
-    console.log(
-      formatEchelonSteps(Matrix(matrix), {
-        method: reducedRowEchelonSteps,
-      })
+    setSpaceBases(
+      arraysToCoordenates(getColumns(matrix, checkIdentityMatrix(redMatrix)[1]))
     );
 
     setOutputContent(

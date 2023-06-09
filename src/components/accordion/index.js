@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import UserContext from "../../context/UserContext";
 
-export default function AnswersAccordion({ text1, text2 }) {
+export default function AnswersAccordion({ text1, text2, text3 }) {
   return (
     <div>
       <Accordion>
@@ -31,6 +31,18 @@ export default function AnswersAccordion({ text1, text2 }) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>{text2}</Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Bases geradoras do espaço</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>{text3}</Typography>
         </AccordionDetails>
       </Accordion>
     </div>
