@@ -8,18 +8,12 @@ function PlusMinusButtons({ parameter }) {
 		useContext(UserContext);
 
 	function handleClick(operation) {
-		if (parameter == "row") {
-			if (rowsNumber >= 2 && operation > 0) {
-				setRowsNumber(rowsNumber + 1 * operation);
-			} else if (rowsNumber > 2 && operation < 0) {
-				setRowsNumber(rowsNumber + 1 * operation);
-			}
-		} else {
-			if (rowsNumber >= 2 && operation > 0) {
-				setColumnsNumber(columnsNumber + 1 * operation);
-			} else if (rowsNumber > 2 && operation < 0) {
-				setColumnsNumber(columnsNumber + 1 * operation);
-			}
+		if (rowsNumber >= 2 && operation > 0) {
+			setColumnsNumber(columnsNumber + 1 * operation);
+			setRowsNumber(rowsNumber + 1 * operation);
+		} else if (rowsNumber > 2 && operation < 0) {
+			setColumnsNumber(columnsNumber + 1 * operation);
+			setRowsNumber(rowsNumber + 1 * operation);
 		}
 	}
 

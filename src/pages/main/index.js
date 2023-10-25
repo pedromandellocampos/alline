@@ -34,7 +34,6 @@ function MainPage() {
 					gap="30px"
 				>
 					<PlusMinusButtons parameter="row" />
-					<PlusMinusButtons parameter="columns" />
 					<GenerateButton />
 				</Box>
 
